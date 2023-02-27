@@ -20,4 +20,6 @@ public interface IUsersRepository {
 			throws ClassNotFoundException, SQLException;
 
 	public boolean isUserExistsByUsername(String username) throws SQLException, ClassNotFoundException;
+
+	public int changePasswordById(int id, String username, String password) throws ClassNotFoundException, SQLException;
 }

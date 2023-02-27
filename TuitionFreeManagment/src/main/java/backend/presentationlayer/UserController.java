@@ -43,4 +43,9 @@ public class UserController {
 	public boolean isUserExistsByUsername(String username) throws SQLException, ClassNotFoundException {
 		return service.isUserExistsByUsername(username);
 	}
+
+	public int changePasswordById(int id, String username, String password)
+			throws ClassNotFoundException, SQLException {
+		return service.changePasswordById(id, username, password);
+	}
 }

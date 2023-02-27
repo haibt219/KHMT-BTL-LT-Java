@@ -37,8 +37,9 @@ public class SubjectService implements ISubjectService {
 		return repository.deleteSubject(id);
 	}
 
-	public int updateSubjectById(int id) throws ClassNotFoundException, SQLException {
-		return repository.updateSubjectById(id);
+	public int updateSubjectById(int id, int signalNumber, double amountOfMoney)
+			throws ClassNotFoundException, SQLException {
+		return repository.updateSubjectById(id, signalNumber, amountOfMoney);
 	}
 
 }

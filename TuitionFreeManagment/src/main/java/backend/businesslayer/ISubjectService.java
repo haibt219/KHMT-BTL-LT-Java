@@ -17,5 +17,6 @@ public interface ISubjectService {
 
 	public int deleteSubject(int id) throws ClassNotFoundException, SQLException;
 
-	public int updateSubjectById(int id) throws ClassNotFoundException, SQLException;
+	public int updateSubjectById(int id, int signalNumber, double amountOfMoney)
+			throws ClassNotFoundException, SQLException;
 }

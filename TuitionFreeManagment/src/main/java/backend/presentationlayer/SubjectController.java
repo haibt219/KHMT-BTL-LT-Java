@@ -37,7 +37,8 @@ public class SubjectController {
 		return service.deleteSubject(id);
 	}
 
-	public int updateSubjectById(int id) throws ClassNotFoundException, SQLException {
-		return service.updateSubjectById(id);
+	public int updateSubjectById(int id, int signalNumber, double amountOfMoney)
+			throws ClassNotFoundException, SQLException {
+		return service.updateSubjectById(id, signalNumber, amountOfMoney);
 	}
 }

@@ -44,4 +44,9 @@ public class UsersService implements IUsersService {
 		return repository.isUserExistsByUsername(username);
 	}
 
+	public int changePasswordById(int id, String username, String password)
+			throws ClassNotFoundException, SQLException {
+		return repository.changePasswordById(id, username, password);
+	}
+
 }

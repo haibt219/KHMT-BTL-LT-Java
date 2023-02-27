@@ -158,12 +158,16 @@ public class SubjectRepository implements ISubjectRepository {
 		return 0;
 	}
 
-	public int updateSubjectById(int id) throws ClassNotFoundException, SQLException {
+	public int updateSubjectById(int id, int signalNumber, double amountOfMoney)
+			throws ClassNotFoundException, SQLException {
 		try {
 			Connection connection = jdbcUtils.getConnect();
-			String query = "UPDATE `subject` SET SignalNumber = ?, SignalNumber = ? ";
+			String query = "UPDATE `subject` SET SignalNumber = ?, AmountOfMoney = ? WHERE SubjectID = ?";
+
 			PreparedStatement statement = connection.prepareStatement(query);
-			statement.setInt(1, id);
+			statement.setInt(1, signalNumber);
+			statement.setDouble(2, amountOfMoney);
+			statement.setInt(3, id);
 			int count = statement.executeUpdate();
 			return count;
 		} catch (SQLException se) {

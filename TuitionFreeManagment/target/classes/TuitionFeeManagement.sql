@@ -31,6 +31,7 @@ CREATE TABLE Users (
 	`Role`				ENUM('ADMIN','STUDENT'),
 	FacultyID			INT UNSIGNED NOT NULL,
     TotalMoneyAvailable	DOUBLE DEFAULT 0,
+    TotalDebt			DOUBLE DEFAULT 0,
     YearOfExperience	INT DEFAULT 0,
     CreateDate			DATETIME DEFAULT NOW(),
     FOREIGN KEY (FacultyID) REFERENCES Faculty(FacultyID)

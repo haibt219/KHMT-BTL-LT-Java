@@ -255,4 +255,27 @@ public class UsersRepository implements IUsersRepository {
 		return false;
 	}
 
+	public int changePasswordById(int id, String username, String password)
+			throws ClassNotFoundException, SQLException {
+		try {
+			Connection connection = jdbcUtils.getConnect();
+
+			String query = "UPDATE user SET Username = ?, Password = ? WHERE UserID = ?;";
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, username);
+			statement.setString(2, password);
+			statement.setInt(3, id);
+
+			int count = statement.executeUpdate();
+			return count;
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			jdbcUtils.disConnect();
+		}
+		return 0;
+	}
+
 }
