@@ -21,7 +21,7 @@ DROP TABLE IF EXISTS Users;
 CREATE TABLE Users (
 	UserID 			INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
 	Fullname			VARCHAR(50) NOT NULL,
-	Gender				ENUM("MALE", "FEMALE", "UNKNOWN") NOT NULL,
+	Gender				ENUM('MALE', 'FEMALE', 'UNKNOWN') NOT NULL,
 	Birthday			DATE NOT NULL,
 	Address				VARCHAR(200) NOT NULL,
     NumberPhone			CHAR(10) NOT NULL,
@@ -69,3 +69,8 @@ INSERT INTO Faculty(FacultyName) VALUES
 -- ============================================= ClassOfStudent ============================================= --
 INSERT INTO ClassOfStudent(ClassName) VALUES
 ('KHMT2020IT69');
+
+INSERT INTO Users(Fullname, Gender, Birthday, Address, NumberPhone, Email, Username, `Password`, `Role`, FacultyID, TotalMoneyAvailable, TotalDebt, YearOfExperience) VALUES
+('Bui Thanh Hai', 'MALE', '1999-10-20', 'Ha Noi', '0123456789', 'haibt219@gmail.com', 'haibt', 123456, 'ADMIN', 1, NULL, NULL, 3),
+('Bui Thanh Hai 2', 'MALE', '1999-10-20', 'Ha Noi', '0123456789', 'haibt219@gmail.com', 'haiuser', 123456, 'STUDENT', 1, 1000000, 500000, NULL);
+

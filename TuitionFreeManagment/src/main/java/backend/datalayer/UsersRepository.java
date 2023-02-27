@@ -49,22 +49,23 @@ public class UsersRepository implements IUsersRepository {
 				String username = resultSet.getString("Username");
 				String password = resultSet.getString("Password");
 				Role role = Role.valueOf(resultSet.getString("Role"));
-				Faculty faculty = new Faculty();
-				faculty = (Faculty) resultSet.getObject("FacultyID");
+//				Faculty faculty = new Faculty();
+//				faculty = (Faculty) resultSet.getObject("FacultyID");
+//				String faculty = resultSet.getString("FacultyID");
 
 				Date createDate = resultSet.getDate("CreateDate");
 
 				if (role.equals("ADMIN")) {
 					int yearOfExperience = resultSet.getInt("YearOfExperience");
 					User admin = new Admin(fullname, gender, birthday, address, numberPhone, email, username, password,
-							faculty, yearOfExperience, createDate);
+							null, yearOfExperience, createDate);
 					admin.setUserId(id);
 					listUser.add(admin);
 				} else {
 					double totalMoneyAvailable = resultSet.getDouble("TotalMoneyAvailable");
 					double totalDebt = resultSet.getDouble("TotalDebt");
 					User student = new Student(fullname, gender, birthday, address, numberPhone, email, username,
-							password, faculty, createDate, totalMoneyAvailable, totalDebt);
+							password, null, createDate, totalMoneyAvailable, totalDebt);
 					student.setUserId(id);
 					listUser.add(student);
 				}
@@ -176,7 +177,7 @@ public class UsersRepository implements IUsersRepository {
 //				Faculty faculty = resultSet.getString("Faculty");
 				Date createDate = resultSet.getDate("CreateDate");
 
-				if (role.equals("ADMIN")) {
+				if (role.equals("'ADMIN'")) {
 					User admin = new Admin(fullname, gender, birthday, address, numberPhone, email, username, password,
 							null, createDate);
 					admin.setUserId(id);
