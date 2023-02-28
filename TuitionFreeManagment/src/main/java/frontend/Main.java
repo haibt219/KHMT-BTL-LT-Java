@@ -6,8 +6,6 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
-import backend.presentationlayer.UserController;
-
 public class Main {
 
 	public static void main(String[] args)
@@ -22,8 +20,7 @@ public class Main {
 			// handle exception
 			JOptionPane.showMessageDialog(null, e.getMessage());
 		}
-		UserController userController = new UserController();
-		System.out.println(userController.getAllUser());
+
 	}
 
 }

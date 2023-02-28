@@ -10,16 +10,14 @@ public class Admin extends User {
 	}
 
 	public Admin(String fullname, Gender gender, Date birthday, String address, String numberPhone, String email,
-			String username, String password, Faculty faculty, Date createDate) {
-		super(fullname, gender, birthday, address, numberPhone, email, username, password, Role.ADMIN, faculty,
-				createDate);
+			String username, String password, Faculty faculty) {
+		super(fullname, gender, birthday, address, numberPhone, email, username, password, Role.ADMIN, faculty);
 		// TODO Auto-generated constructor stub
 	}
 
 	public Admin(String fullname, Gender gender, Date birthday, String address, String numberPhone, String email,
-			String username, String password, Faculty faculty, int yearOfExperience, Date createDate) {
-		super(fullname, gender, birthday, address, numberPhone, email, username, password, Role.ADMIN, faculty,
-				createDate);
+			String username, String password, Faculty faculty, int yearOfExperience) {
+		super(fullname, gender, birthday, address, numberPhone, email, username, password, Role.ADMIN, faculty);
 		this.yearOfExperience = yearOfExperience;
 	}
 

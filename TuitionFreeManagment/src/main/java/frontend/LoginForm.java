@@ -16,6 +16,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import backend.presentationlayer.UserController;
+import entity.Role;
 import entity.User;
 
 public class LoginForm extends JFrame implements ActionListener {
@@ -51,7 +52,7 @@ public class LoginForm extends JFrame implements ActionListener {
 		textField2 = new JPasswordField(15); // set length for the password
 
 		// create submit button
-		b1 = new JButton("SUBMIT"); // set label to button
+		b1 = new JButton("LOGIN"); // set label to button
 
 		// create panel to put form elements
 		newPanel = new JPanel(new GridLayout(3, 1));
@@ -70,6 +71,7 @@ public class LoginForm extends JFrame implements ActionListener {
 	}
 
 	// define abstract method actionPerformed() which will be called on button click
+	@Override
 	public void actionPerformed(ActionEvent ae) // pass action listener as a parameter
 	{
 
@@ -79,10 +81,21 @@ public class LoginForm extends JFrame implements ActionListener {
 			User user = userController.login(userValue, passValue);
 
 			// check whether the credentials are authentic or not
-			if (user != null && user.getRole().equals("ADMIN")) { // if authentic, navigate user to a new
+			if (user != null && user.getRole().equals(Role.ADMIN)) { // if authentic, navigate user to a new
 				// page
 
-				// create instance of the NewPage
+				// create instance of the TuitionFeeManagement
+				TuitionFeeManagement pageFeeManagement = new TuitionFeeManagement();
+
+				// make page visible to the user
+				pageFeeManagement.setVisible(true);
+
+				// create a welcome label and set it to the new page
+				JLabel wel_label = new JLabel("Welcome: " + userValue);
+				pageFeeManagement.getContentPane().add(wel_label);
+				dispose();
+			} else if (user != null && user.getRole().equals(Role.STUDENT)) {
+				// create instance of the TuitionFeeManagement
 				NewPage page = new NewPage();
 
 				// make page visible to the user
@@ -91,16 +104,7 @@ public class LoginForm extends JFrame implements ActionListener {
 				// create a welcome label and set it to the new page
 				JLabel wel_label = new JLabel("Welcome: " + userValue);
 				page.getContentPane().add(wel_label);
-			} else if (user != null && user.getRole().equals("STUDENT")) {
-				// create instance of the NewPage
-				NewPage page = new NewPage();
-
-				// make page visible to the user
-				page.setVisible(true);
-
-				// create a welcome label and set it to the new page
-				JLabel wel_label = new JLabel("Welcome: " + userValue);
-				page.getContentPane().add(wel_label);
+				dispose();
 			} else {
 				// show error message
 				System.out.println("Please enter valid username and password");

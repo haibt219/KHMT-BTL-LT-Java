@@ -22,7 +22,7 @@ public class User {
 	}
 
 	public User(String fullname, Gender gender, Date birthday, String address, String numnerPhone, String email,
-			String username, String password, Role role, Faculty faculty, Date createDate) {
+			String username, String password, Role role, Faculty faculty) {
 		super();
 		count++;
 		this.userId = count;
@@ -36,7 +36,8 @@ public class User {
 		this.password = password;
 		this.role = role;
 		this.faculty = faculty;
-		this.createDate = createDate;
+		java.util.Date date = new java.util.Date();
+		this.createDate = date;
 	}
 
 	public int getUserId() {

@@ -26,6 +26,7 @@ public class UsersRepository implements IUsersRepository {
 		jdbcUtils = new JDBCUtils();
 	}
 
+	@Override
 	public List<User> getAllUser() throws ClassNotFoundException, SQLException {
 		try {
 			// Khởi tạo danh sách users
@@ -35,7 +36,7 @@ public class UsersRepository implements IUsersRepository {
 			Connection connection = jdbcUtils.getConnect();
 
 			Statement statement = connection.createStatement();
-			String query = "SELECT * FROM tuitionfeemanagement.users";
+			String query = "SELECT * FROM tuitionfeemanagement.users;";
 			ResultSet resultSet = statement.executeQuery(query);
 
 			while (resultSet.next()) {
@@ -55,17 +56,18 @@ public class UsersRepository implements IUsersRepository {
 
 				Date createDate = resultSet.getDate("CreateDate");
 
-				if (role.equals("ADMIN")) {
+				if (role.equals(Role.ADMIN)) {
 					int yearOfExperience = resultSet.getInt("YearOfExperience");
 					User admin = new Admin(fullname, gender, birthday, address, numberPhone, email, username, password,
-							null, yearOfExperience, createDate);
+							null, yearOfExperience);
 					admin.setUserId(id);
+					admin.setCreateDate(createDate);
 					listUser.add(admin);
 				} else {
 					double totalMoneyAvailable = resultSet.getDouble("TotalMoneyAvailable");
 					double totalDebt = resultSet.getDouble("TotalDebt");
 					User student = new Student(fullname, gender, birthday, address, numberPhone, email, username,
-							password, null, createDate, totalMoneyAvailable, totalDebt);
+							password, null, totalMoneyAvailable, totalDebt);
 					student.setUserId(id);
 					listUser.add(student);
 				}
@@ -82,6 +84,7 @@ public class UsersRepository implements IUsersRepository {
 		return null;
 	}
 
+	@Override
 	public User getUserById(int id) throws ClassNotFoundException, SQLException {
 		try {
 			Connection connection = jdbcUtils.getConnect();
@@ -109,15 +112,16 @@ public class UsersRepository implements IUsersRepository {
 				if (role.equals("ADMIN")) {
 					int yearOfExperience = resultSet.getInt("YearOfExperience");
 					User admin = new Admin(fullname, gender, birthday, address, numberPhone, email, username, password,
-							faculty, yearOfExperience, createDate);
+							faculty, yearOfExperience);
 					admin.setUserId(id2);
+					admin.setCreateDate(createDate);
 					return admin;
 				} else {
 					double toDebt = resultSet.getDouble("TotalDebt");
 					double totalMoneyAvailable = resultSet.getDouble("TotalMoneyAvailable");
 
 					User student = new Student(fullname, gender, birthday, address, numberPhone, email, username,
-							password, faculty, createDate, totalMoneyAvailable, toDebt);
+							password, faculty, totalMoneyAvailable, toDebt);
 					student.setUserId(id2);
 					return student;
 				}
@@ -134,6 +138,7 @@ public class UsersRepository implements IUsersRepository {
 		return null;
 	}
 
+	@Override
 	public int deleteStudentById(int id) throws ClassNotFoundException, SQLException {
 		try {
 			Connection connection = jdbcUtils.getConnect();
@@ -155,11 +160,12 @@ public class UsersRepository implements IUsersRepository {
 		return 0;
 	}
 
+	@Override
 	public User login(String username, String password) throws ClassNotFoundException, SQLException {
 		try {
 			Connection connection = jdbcUtils.getConnect();
 
-			String query = "SELECT UserID, Fullname, Role FROM tuitionfeemanagement.users WHERE Email = ? AND Password = ?";
+			String query = "SELECT UserID, Fullname, Role FROM tuitionfeemanagement.users WHERE Username = ? AND Password = ?";
 			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setString(1, username);
 			statement.setString(2, password);
@@ -168,24 +174,20 @@ public class UsersRepository implements IUsersRepository {
 			if (resultSet.next()) {
 				int id = resultSet.getInt("UserID");
 				String fullname = resultSet.getString("Fullname");
-				Gender gender = Gender.valueOf(resultSet.getString("Gender"));
-				Date birthday = resultSet.getDate("Birthday");
-				String address = resultSet.getString("Address");
-				String numberPhone = resultSet.getString("NumberPhone");
-				String email = resultSet.getString("Email");
-				Role role = Role.valueOf(resultSet.getString("Role"));
-//				Faculty faculty = resultSet.getString("Faculty");
-				Date createDate = resultSet.getDate("CreateDate");
 
-				if (role.equals("'ADMIN'")) {
-					User admin = new Admin(fullname, gender, birthday, address, numberPhone, email, username, password,
-							null, createDate);
+				Role role = Role.valueOf(resultSet.getString("Role"));
+
+				if (role.equals(Role.ADMIN)) {
+					User admin = new Admin();
 					admin.setUserId(id);
+					admin.setFullname(fullname);
+					admin.setRole(role);
 					return admin;
 				} else {
-					User student = new Student(fullname, gender, birthday, address, numberPhone, email, username,
-							password, null, createDate);
+					User student = new Student();
 					student.setUserId(id);
+					student.setFullname(fullname);
+					student.setRole(role);
 					return student;
 				}
 			} else {
@@ -201,6 +203,7 @@ public class UsersRepository implements IUsersRepository {
 		return null;
 	}
 
+	@Override
 	public int createStudent(String fullname, String gender, Date birthday, String address, String numberPhone,
 			String email, String username, String password, int faculty, Date createDate, double totalMoneyAvailable)
 			throws ClassNotFoundException, SQLException {
@@ -219,7 +222,6 @@ public class UsersRepository implements IUsersRepository {
 			statement.setString(6, email);
 			statement.setString(7, username);
 			statement.setInt(8, faculty);
-			statement.setDouble(9, totalMoneyAvailable);
 
 			int count = statement.executeUpdate();
 			return count;
@@ -234,6 +236,7 @@ public class UsersRepository implements IUsersRepository {
 
 	}
 
+	@Override
 	public boolean isUserExistsByUsername(String username) throws SQLException, ClassNotFoundException {
 		try {
 			Connection connection = jdbcUtils.getConnect();
@@ -256,6 +259,7 @@ public class UsersRepository implements IUsersRepository {
 		return false;
 	}
 
+	@Override
 	public int changePasswordById(int id, String username, String password)
 			throws ClassNotFoundException, SQLException {
 		try {

@@ -11,19 +11,17 @@ public class Student extends User {
 	}
 
 	public Student(String fullname, Gender gender, Date birthday, String address, String numberPhone, String email,
-			String username, String password, Faculty faculty, Date createDate) {
-		super(fullname, gender, birthday, address, numberPhone, email, username, password, Role.STUDENT, faculty,
-				createDate);
+			String username, String password, Faculty faculty) {
+		super(fullname, gender, birthday, address, numberPhone, email, username, password, Role.STUDENT, faculty);
 
 	}
 
 	public Student(String fullname, Gender gender, Date birthday, String address, String numberPhone, String email,
-			String username, String password, Faculty faculty, Date createDate, double totalMoneyAvailable,
-			double totalDebt) {
-		super(fullname, gender, birthday, address, numberPhone, email, username, password, Role.STUDENT, faculty,
-				createDate);
+			String username, String password, Faculty faculty, double totalMoneyAvailable, double totalDebt) {
+		super(fullname, gender, birthday, address, numberPhone, email, username, password, Role.STUDENT, faculty);
 		this.totalMoneyAvailable = totalMoneyAvailable;
 		this.totalDebt = totalDebt;
+
 	}
 
 	public double getTotalDebt() {
