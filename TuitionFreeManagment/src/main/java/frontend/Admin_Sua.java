@@ -5,6 +5,10 @@
  */
 package frontend;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -64,16 +68,28 @@ public class Admin_Sua extends javax.swing.JFrame {
 		btnSua.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 		btnSua.setText("Sửa");
 		btnSua.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				btnSuaActionPerformed(evt);
+				try {
+					btnSuaActionPerformed(evt);
+				} catch (ClassNotFoundException | IOException | SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 
 		btnCancel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 		btnCancel.setText("Hủy bỏ");
 		btnCancel.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				btnCancelActionPerformed(evt);
+				try {
+					btnCancelActionPerformed(evt);
+				} catch (ClassNotFoundException | IOException | SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 
@@ -137,7 +153,8 @@ public class Admin_Sua extends javax.swing.JFrame {
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
 
-	private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnSuaActionPerformed
+	private void btnSuaActionPerformed(java.awt.event.ActionEvent evt)
+			throws FileNotFoundException, ClassNotFoundException, IOException, SQLException {// GEN-FIRST:event_btnSuaActionPerformed
 		int msg = JOptionPane.showConfirmDialog(null, "sửa học phần?", "Thông báo", JOptionPane.YES_NO_OPTION);
 		if (msg == JOptionPane.YES_OPTION) {
 			JOptionPane.showMessageDialog(null, "Sửa thành công");
@@ -149,7 +166,8 @@ public class Admin_Sua extends javax.swing.JFrame {
 		}
 	}// GEN-LAST:event_btnSuaActionPerformed
 
-	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCancelActionPerformed
+	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt)
+			throws FileNotFoundException, ClassNotFoundException, IOException, SQLException {// GEN-FIRST:event_btnCancelActionPerformed
 		this.dispose();
 		new Admin_page().setVisible(true);
 	}// GEN-LAST:event_btnCancelActionPerformed
@@ -186,6 +204,7 @@ public class Admin_Sua extends javax.swing.JFrame {
 
 		/* Create and display the form */
 		java.awt.EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				new Admin_Sua().setVisible(true);
 			}

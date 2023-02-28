@@ -5,6 +5,10 @@
  */
 package frontend;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+
 /**
  *
  * @author ADMIN
@@ -66,8 +70,14 @@ public class Admin_Cong_No extends javax.swing.JFrame {
 		btnLogout.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 		btnLogout.setText("Quay lại");
 		btnLogout.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				btnLogoutActionPerformed(evt);
+				try {
+					btnLogoutActionPerformed(evt);
+				} catch (ClassNotFoundException | IOException | SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 
@@ -104,7 +114,8 @@ public class Admin_Cong_No extends javax.swing.JFrame {
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
 
-	private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnLogoutActionPerformed
+	private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt)
+			throws FileNotFoundException, ClassNotFoundException, IOException, SQLException {// GEN-FIRST:event_btnLogoutActionPerformed
 		new Admin_page().setVisible(true);
 		this.dispose();
 
@@ -146,6 +157,7 @@ public class Admin_Cong_No extends javax.swing.JFrame {
 
 		/* Create and display the form */
 		java.awt.EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				new Admin_Cong_No().setVisible(true);
 			}

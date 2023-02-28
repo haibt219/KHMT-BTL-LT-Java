@@ -85,14 +85,14 @@ public class LoginForm extends JFrame implements ActionListener {
 				// page
 
 				// create instance of the TuitionFeeManagement
-				TuitionFeeManagement pageFeeManagement = new TuitionFeeManagement();
+				Admin_page admin_page = new Admin_page();
 
 				// make page visible to the user
-				pageFeeManagement.setVisible(true);
+				admin_page.setVisible(true);
 
 				// create a welcome label and set it to the new page
 				JLabel wel_label = new JLabel("Welcome: " + userValue);
-				pageFeeManagement.getContentPane().add(wel_label);
+				admin_page.getContentPane().add(wel_label);
 				dispose();
 			} else if (user != null && user.getRole().equals(Role.STUDENT)) {
 				// create instance of the TuitionFeeManagement
@@ -113,6 +113,12 @@ public class LoginForm extends JFrame implements ActionListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

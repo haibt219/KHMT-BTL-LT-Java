@@ -5,6 +5,10 @@
  */
 package frontend;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -59,16 +63,28 @@ public class Admin_add extends javax.swing.JFrame {
 		btnAdd.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 		btnAdd.setText("Thêm");
 		btnAdd.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				btnAddActionPerformed(evt);
+				try {
+					btnAddActionPerformed(evt);
+				} catch (ClassNotFoundException | IOException | SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 
 		btnCancel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 		btnCancel.setText("Hủy bỏ");
 		btnCancel.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				btnCancelActionPerformed(evt);
+				try {
+					btnCancelActionPerformed(evt);
+				} catch (ClassNotFoundException | IOException | SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 
@@ -116,12 +132,14 @@ public class Admin_add extends javax.swing.JFrame {
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
 
-	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCancelActionPerformed
+	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt)
+			throws FileNotFoundException, ClassNotFoundException, IOException, SQLException {// GEN-FIRST:event_btnCancelActionPerformed
 		this.dispose();
 		new Admin_page().setVisible(true);
 	}// GEN-LAST:event_btnCancelActionPerformed
 
-	private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAddActionPerformed
+	private void btnAddActionPerformed(java.awt.event.ActionEvent evt)
+			throws FileNotFoundException, ClassNotFoundException, IOException, SQLException {// GEN-FIRST:event_btnAddActionPerformed
 		int msg = JOptionPane.showConfirmDialog(null, "Thêm học phần?", "Thông báo", JOptionPane.YES_NO_OPTION);
 		if (msg == JOptionPane.YES_OPTION) {
 			JOptionPane.showMessageDialog(null, "Thêm thành công!");
@@ -164,6 +182,7 @@ public class Admin_add extends javax.swing.JFrame {
 
 		/* Create and display the form */
 		java.awt.EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				new Admin_add().setVisible(true);
 			}

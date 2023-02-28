@@ -20,6 +20,7 @@ public class SubjectRepository implements ISubjectRepository {
 		jdbcUtils = new JDBCUtils();
 	}
 
+	@Override
 	public List<Subject> getAllSubject() throws ClassNotFoundException, SQLException {
 		try {
 			Connection connection = jdbcUtils.getConnect();
@@ -34,7 +35,7 @@ public class SubjectRepository implements ISubjectRepository {
 			while (resultSet.next()) {
 				int id = resultSet.getInt("SubjectID");
 				String subjectName = resultSet.getString("SubjectName");
-				int signalNumber = resultSet.getInt("subjectName");
+				int signalNumber = resultSet.getInt("SignalNumber");
 				double amountOfMoney = resultSet.getDouble("AmountOfMoney");
 
 				Subject subject = new Subject(subjectName, signalNumber, amountOfMoney);
@@ -52,6 +53,7 @@ public class SubjectRepository implements ISubjectRepository {
 		return null;
 	}
 
+	@Override
 	public Subject getSubjectBySubjectName(String subjectName) throws ClassNotFoundException, SQLException {
 		try {
 			Connection connection = jdbcUtils.getConnect();
@@ -83,6 +85,7 @@ public class SubjectRepository implements ISubjectRepository {
 		return null;
 	}
 
+	@Override
 	public Subject getSubjectBySubjectId(int id) throws ClassNotFoundException, SQLException {
 		try {
 			Connection connection = jdbcUtils.getConnect();
@@ -114,6 +117,7 @@ public class SubjectRepository implements ISubjectRepository {
 		return null;
 	}
 
+	@Override
 	public int createSubject(String subjectName, int signalNumber, double amountOfMoney)
 			throws ClassNotFoundException, SQLException {
 		try {
@@ -137,6 +141,7 @@ public class SubjectRepository implements ISubjectRepository {
 		return 0;
 	}
 
+	@Override
 	public int deleteSubject(int id) throws ClassNotFoundException, SQLException {
 		try {
 			Connection connection = jdbcUtils.getConnect();
@@ -158,6 +163,7 @@ public class SubjectRepository implements ISubjectRepository {
 		return 0;
 	}
 
+	@Override
 	public int updateSubjectById(int id, int signalNumber, double amountOfMoney)
 			throws ClassNotFoundException, SQLException {
 		try {

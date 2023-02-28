@@ -5,8 +5,9 @@
  */
 package frontend;
 
-import java.util.*;
-import javax.swing.ImageIcon;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
 
 /**
  *
@@ -41,8 +42,14 @@ public class QuanLiHocPhi extends javax.swing.JFrame {
 		btnLogin.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 		btnLogin.setText("Đăng nhập");
 		btnLogin.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				btnLoginActionPerformed(evt);
+				try {
+					btnLoginActionPerformed(evt);
+				} catch (ClassNotFoundException | IOException | SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 
@@ -110,7 +117,8 @@ public class QuanLiHocPhi extends javax.swing.JFrame {
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
 
-	private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnLoginActionPerformed
+	private void btnLoginActionPerformed(java.awt.event.ActionEvent evt)
+			throws FileNotFoundException, ClassNotFoundException, IOException, SQLException {// GEN-FIRST:event_btnLoginActionPerformed
 		if (txtUsername.getText().equals("Admin" + "") && txtPassword.getText().equals("123" + "")) {
 			new Admin_page().setVisible(true);
 			this.dispose();
