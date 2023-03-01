@@ -78,7 +78,9 @@ INSERT INTO Users(Fullname, Gender, Birthday, Address, NumberPhone, Email, Usern
 ('Xuan Quang', 'MALE', '1999-10-22', 'Ha Noi', '0123456789', 'xuanquanguser@gmail.com', 'xuanquang', 123456, 'STUDENT', 1, 1000000, 500000, NULL);
 
 INSERT INTO `Subject`(SubjectName, SignalNumber, AmountOfMoney) VALUES
-('LT Java', '3', 750000);
+('LT Java', '3', 750000),
+('LT PHP', '3', 750000),
+('LT Ruby', '3', 750000);
 
 INSERT INTO Bill( UserID, SubjectID, TotalMoney, Note, `Status`) VALUES
 (1, 1, 1000000, "", '0');

@@ -11,7 +11,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 
 import backend.presentationlayer.SubjectController;
 import entity.Subject;
@@ -23,7 +25,7 @@ import entity.Subject;
 public class Admin_page extends javax.swing.JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private static SubjectController subjectController;
+	// private static SubjectController subjectController;
 	private static List<Subject> listSubjects = new ArrayList<Subject>();
 
 	/**
@@ -36,16 +38,19 @@ public class Admin_page extends javax.swing.JFrame {
 	 */
 	public Admin_page() throws FileNotFoundException, IOException, ClassNotFoundException, SQLException {
 		initComponents();
-		subjectController = new SubjectController();
+		// subjectController = new SubjectController();
 
 	}
 
-	private static String getSubject() throws ClassNotFoundException, SQLException {
+	private static Object[][] getSubject()
+			throws ClassNotFoundException, SQLException, FileNotFoundException, IOException {
+		SubjectController subjectController = new SubjectController();
 		listSubjects = subjectController.getAllSubject();
-		String data = null;
+		Object[][] data = null;
 		for (Subject objects : listSubjects) {
-			data += objects.getSubjectName() + "," + objects.getSubjectId() + "," + objects.getSignalNumber() + ","
-					+ objects.getAmountOfMoney();
+			Object[][] a = { { objects.getSubjectName(), objects.getSubjectId(), objects.getSignalNumber(),
+					objects.getAmountOfMoney() } };
+			data = a;
 		}
 		return data;
 	};
@@ -57,11 +62,13 @@ public class Admin_page extends javax.swing.JFrame {
 	 * 
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 * @throws FileNotFoundException
 	 */
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// Code">//GEN-BEGIN:initComponents
-	private void initComponents() throws ClassNotFoundException, SQLException {
+	private void initComponents() throws ClassNotFoundException, SQLException, FileNotFoundException, IOException {
 
 		jLabel1 = new javax.swing.JLabel();
 		jLabel2 = new javax.swing.JLabel();
@@ -129,27 +136,49 @@ public class Admin_page extends javax.swing.JFrame {
 			}
 		});
 
-		jTable1.setModel(new javax.swing.table.DefaultTableModel(new Object[][] { { /* getSubject() */ } },
-				new String[] { "Tên học phần", "Mã học phần", "Số tín chỉ", "Thành tiền" }) {
-			private static final long serialVersionUID = 1L;
-			Class[] types = new Class[] { java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class,
-					java.lang.Double.class };
+//		jTable1.setModel(new javax.swing.table.DefaultTableModel(new Object[][] { { getSubject() } },
+//				new String[] { "Tên học phần", "Mã học phần", "Số tín chỉ", "Thành tiền" }) {
+//			
+//			
+//
+//			private static final long serialVersionUID = 1L;
+//			Class[] types = new Class[] { java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class,
+//					java.lang.Double.class };
+//
+//			@Override
+//			public Class getColumnClass(int columnIndex) {
+//				return types[columnIndex];
+//			}
+		// });
+		String[][] data = { { "Kundan Kumar Jha", "4031", "CSE" }, { "Anand Jha", "6014", "IT" } };
+		String[] columnNames = { "Name", "Roll Number", "Department" };
+		// Initializing the JTable
 
-			@Override
-			public Class getColumnClass(int columnIndex) {
-				return types[columnIndex];
-			}
-		});
+//		jTable1.setModel(new javax.swing.table.DefaultTableModel(data, columnNames) {
+//
+//		});
+
+		jTable1 = new javax.swing.JTable(data, columnNames);
+		JFrame jFrame = new JFrame();
+		jTable1.setBounds(30, 40, 200, 300);
+		// adding it to JScrollPane
+		JScrollPane sp = new JScrollPane(jTable1);
+		jFrame.add(sp);
+		// Frame Size
+//		jFrame.setSize(500, 200);
+//		jFrame.setLocationRelativeTo(null);
+//		jFrame.setVisible(true);
+
 		jTable1.setColumnSelectionAllowed(true);
 		jScrollPane1.setViewportView(jTable1);
 		jTable1.getColumnModel().getSelectionModel()
 				.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		if (jTable1.getColumnModel().getColumnCount() > 0) {
-			jTable1.getColumnModel().getColumn(0).setResizable(false);
-			jTable1.getColumnModel().getColumn(1).setResizable(false);
-			jTable1.getColumnModel().getColumn(2).setResizable(false);
-			jTable1.getColumnModel().getColumn(3).setResizable(false);
-		}
+//		if (jTable1.getColumnModel().getColumnCount() > 0) {
+//			jTable1.getColumnModel().getColumn(0).setResizable(false);
+//			jTable1.getColumnModel().getColumn(1).setResizable(false);
+//			jTable1.getColumnModel().getColumn(2).setResizable(false);
+//			jTable1.getColumnModel().getColumn(3).setResizable(false);
+//		}
 
 		btnLogout.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 		btnLogout.setText("Đăng xuất");
@@ -380,5 +409,6 @@ public class Admin_page extends javax.swing.JFrame {
 	private javax.swing.JTextField txtSotc;
 	private javax.swing.JTextField txtTenhp;
 	private javax.swing.JTextField txtTimkiem;
+
 	// End of variables declaration//GEN-END:variables
 }

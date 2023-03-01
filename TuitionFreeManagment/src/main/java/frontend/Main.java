@@ -3,11 +3,8 @@ package frontend;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import backend.presentationlayer.SubjectController;
-import entity.Subject;
 
 public class Main {
 
@@ -25,11 +22,8 @@ public class Main {
 //		}
 
 		SubjectController controller = new SubjectController();
-		List<Subject> list = new ArrayList<Subject>();
-		list = controller.getAllSubject();
-		for (Subject subject : list) {
-			System.out.println(subject.getSubjectId());
-		}
+//		System.out.println(controller.deleteSubject(2));
+//		System.out.println(controller.updateSubjectById(3, 4, 1000000));
 
 	}
 
