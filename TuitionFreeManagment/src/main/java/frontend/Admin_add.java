@@ -5,9 +5,12 @@
  */
 package frontend;
 
+import backend.presentationlayer.SubjectController;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 
@@ -20,8 +23,12 @@ public class Admin_add extends javax.swing.JFrame {
 	/**
 	 * Creates new form Admin_add
 	 */
-	public Admin_add() {
+        private SubjectController subjectController;
+    
+	public Admin_add() throws IOException {
+            
 		initComponents();
+                subjectController = new SubjectController();
 	}
 
 	/**
@@ -142,6 +149,11 @@ public class Admin_add extends javax.swing.JFrame {
 			throws FileNotFoundException, ClassNotFoundException, IOException, SQLException {// GEN-FIRST:event_btnAddActionPerformed
 		int msg = JOptionPane.showConfirmDialog(null, "Thêm học phần?", "Thông báo", JOptionPane.YES_NO_OPTION);
 		if (msg == JOptionPane.YES_OPTION) {
+                        String tenHP = txtTenhp.getText();
+                        Double hocPhi = Double.parseDouble(txtMahp.getText());
+                        Integer  soTC = Integer.parseInt(txtSotc.getText());
+                        subjectController.createSubject(tenHP, soTC, hocPhi);
+
 			JOptionPane.showMessageDialog(null, "Thêm thành công!");
 
 		} else {
@@ -184,7 +196,11 @@ public class Admin_add extends javax.swing.JFrame {
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				new Admin_add().setVisible(true);
+                            try {
+                                new Admin_add().setVisible(true);
+                            } catch (IOException ex) {
+                                Logger.getLogger(Admin_add.class.getName()).log(Level.SEVERE, null, ex);
+                            }
 			}
 		});
 	}

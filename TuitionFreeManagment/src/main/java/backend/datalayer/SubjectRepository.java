@@ -21,7 +21,7 @@ public class SubjectRepository implements ISubjectRepository {
 	}
 
 	@Override
-	public List<Subject> getAllSubject() throws ClassNotFoundException, SQLException {
+	public String[][] getAllSubject() throws ClassNotFoundException, SQLException {
 		try {
 			Connection connection = jdbcUtils.getConnect();
 
@@ -29,20 +29,26 @@ public class SubjectRepository implements ISubjectRepository {
 			String query = "SELECT * FROM tuitionfeemanagement.subject";
 
 			ResultSet resultSet = statement.executeQuery(query);
-
+			int size = resultSet.getFetchSize();
 			List<Subject> listSubjects = new ArrayList<Subject>();
-
+			String[][] rs = new String[100][4];
+			int i = 0;
 			while (resultSet.next()) {
-				int id = resultSet.getInt("SubjectID");
-				String subjectName = resultSet.getString("SubjectName");
-				int signalNumber = resultSet.getInt("SignalNumber");
-				double amountOfMoney = resultSet.getDouble("AmountOfMoney");
 
-				Subject subject = new Subject(subjectName, signalNumber, amountOfMoney);
-				subject.setSubjectId(id);
-				listSubjects.add(subject);
+				Integer id = resultSet.getInt("SubjectID");
+				String subjectName = resultSet.getString("SubjectName");
+				Integer signalNumber = resultSet.getInt("SignalNumber");
+				Double amountOfMoney = resultSet.getDouble("AmountOfMoney");
+				rs[i][0] = id.toString();
+				rs[i][1] = subjectName;
+				rs[i][2] = signalNumber.toString();
+				rs[i][3] = amountOfMoney.toString();
+				i++;
+//				Subject subject = new Subject(subjectName, signalNumber, amountOfMoney);
+//				subject.setSubjectId(id);
+//				listSubjects.add(subject);
 			}
-			return listSubjects;
+			return rs;
 		} catch (SQLException se) {
 			se.printStackTrace();
 		} catch (Exception e) {

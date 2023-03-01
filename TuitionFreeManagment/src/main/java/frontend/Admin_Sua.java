@@ -5,6 +5,8 @@
  */
 package frontend;
 
+import backend.presentationlayer.SubjectController;
+import entity.Subject;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -20,7 +22,21 @@ public class Admin_Sua extends javax.swing.JFrame {
 	/**
 	 * Creates new form Admin_Sua
 	 */
+    private SubjectController subjectController;
+    
+    private Subject subject;
+    
+    private int id;
 	public Admin_Sua() {
+		initComponents();
+	}
+        public Admin_Sua(int id) throws IOException, ClassNotFoundException, SQLException {
+            this.id = id;
+            
+            this.subject = subjectController.getSubjectBySubjectId(id);
+            jLabel1.setText(subject.getSubjectName());
+            jLabel2.setText(String.valueOf(subject.getSubjectId()));
+        
 		initComponents();
 	}
 
@@ -157,6 +173,11 @@ public class Admin_Sua extends javax.swing.JFrame {
 			throws FileNotFoundException, ClassNotFoundException, IOException, SQLException {// GEN-FIRST:event_btnSuaActionPerformed
 		int msg = JOptionPane.showConfirmDialog(null, "sửa học phần?", "Thông báo", JOptionPane.YES_NO_OPTION);
 		if (msg == JOptionPane.YES_OPTION) {
+                    Double hocPhi = Double.valueOf(txtThanhtien.getText());
+                        Integer  soTC = Integer.parseInt(txtSotc.getText());
+                        subjectController.updateSubjectById(id, soTC, hocPhi);
+                    
+                    
 			JOptionPane.showMessageDialog(null, "Sửa thành công");
 			this.dispose();
 			new Admin_page().setVisible(true);

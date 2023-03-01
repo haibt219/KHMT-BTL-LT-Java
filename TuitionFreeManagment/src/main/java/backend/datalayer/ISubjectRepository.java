@@ -1,12 +1,11 @@
 package backend.datalayer;
 
 import java.sql.SQLException;
-import java.util.List;
 
 import entity.Subject;
 
 public interface ISubjectRepository {
-	public List<Subject> getAllSubject() throws ClassNotFoundException, SQLException;
+	public String[][] getAllSubject() throws ClassNotFoundException, SQLException;
 
 	public Subject getSubjectBySubjectName(String subjectName) throws ClassNotFoundException, SQLException;
 

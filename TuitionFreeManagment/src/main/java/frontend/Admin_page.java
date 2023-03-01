@@ -28,6 +28,8 @@ public class Admin_page extends javax.swing.JFrame {
 	// private static SubjectController subjectController;
 	private static List<Subject> listSubjects = new ArrayList<Subject>();
 
+	private SubjectController subjectController = new SubjectController();
+
 	/**
 	 * Creates new form Admin_page
 	 * 
@@ -42,18 +44,18 @@ public class Admin_page extends javax.swing.JFrame {
 
 	}
 
-	private static Object[][] getSubject()
-			throws ClassNotFoundException, SQLException, FileNotFoundException, IOException {
-		SubjectController subjectController = new SubjectController();
-		listSubjects = subjectController.getAllSubject();
-		Object[][] data = null;
-		for (Subject objects : listSubjects) {
-			Object[][] a = { { objects.getSubjectName(), objects.getSubjectId(), objects.getSignalNumber(),
-					objects.getAmountOfMoney() } };
-			data = a;
-		}
-		return data;
-	};
+//	private static Object[][] getSubject()
+//			throws ClassNotFoundException, SQLException, FileNotFoundException, IOException {
+//		SubjectController subjectController = new SubjectController();
+////		listSubjects = subjectController.getAllSubject();
+//		Object[][] data = null;
+//		for (Subject objects : listSubjects) {
+//			Object[][] a = { { objects.getSubjectName(), objects.getSubjectId(), objects.getSignalNumber(),
+//					objects.getAmountOfMoney() } };
+//			data = a;
+//		}
+//		return data;
+//	};
 
 	/**
 	 * This method is called from within the constructor to initialize the form.
@@ -114,7 +116,12 @@ public class Admin_page extends javax.swing.JFrame {
 		btnAdd.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				btnAddActionPerformed(evt);
+				try {
+					btnAddActionPerformed(evt);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 
@@ -150,8 +157,9 @@ public class Admin_page extends javax.swing.JFrame {
 //				return types[columnIndex];
 //			}
 		// });
-		String[][] data = { { "Kundan Kumar Jha", "4031", "CSE" }, { "Anand Jha", "6014", "IT" } };
-		String[] columnNames = { "Name", "Roll Number", "Department" };
+		String[][] data = subjectController.getAllSubject();
+
+		String[] columnNames = { "ID", "Name", "Roll Number", "Department" };
 		// Initializing the JTable
 
 //		jTable1.setModel(new javax.swing.table.DefaultTableModel(data, columnNames) {
@@ -314,9 +322,12 @@ public class Admin_page extends javax.swing.JFrame {
 
 	}// GEN-LAST:event_btnTimkiemActionPerformed
 
-	private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAddActionPerformed
+	private void btnAddActionPerformed(java.awt.event.ActionEvent evt) throws IOException {// GEN-FIRST:event_btnAddActionPerformed
 		new Admin_add().setVisible(true);
 		this.dispose();
+		// lay 3 gtri tu giao dien
+
+		// them
 	}// GEN-LAST:event_btnAddActionPerformed
 
 	private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnSuaActionPerformed

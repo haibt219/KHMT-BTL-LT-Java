@@ -2,7 +2,7 @@ package entity;
 
 public class Subject {
 	private static int count = 0;
-	private int subjectId;
+	private Integer subjectId;
 	private String subjectName;
 	private int signalNumber;
 	private double amountOfMoney;

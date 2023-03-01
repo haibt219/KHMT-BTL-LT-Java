@@ -3,7 +3,6 @@ package backend.presentationlayer;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 import backend.businesslayer.ISubjectService;
 import backend.businesslayer.SubjectService;
@@ -16,7 +15,7 @@ public class SubjectController {
 		service = new SubjectService();
 	}
 
-	public List<Subject> getAllSubject() throws ClassNotFoundException, SQLException {
+	public String[][] getAllSubject() throws ClassNotFoundException, SQLException {
 		return service.getAllSubject();
 	}
 
